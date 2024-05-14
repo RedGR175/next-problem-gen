@@ -1,0 +1,20 @@
+import { Inter } from 'next/font/google';
+import ProblemGenerator from '../components/problem-gen';
+import Link from 'next/link';
+
+const inter = Inter({ subsets: ['latin'] });
+
+export default function Home() {
+  return (
+    <main>
+      <Link href="/about">
+        <p>AboutPage</p>
+      </Link>
+      <h1>AI Problem Generator</h1>
+      <div className="description">
+        <p>This is an AI Problem Generator. It creates problems from a simple text prompt.</p>
+      </div>
+      <ProblemGenerator />
+    </main>
+  );
+}
