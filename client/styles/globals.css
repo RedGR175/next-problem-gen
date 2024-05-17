@@ -55,19 +55,23 @@ main {
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   #problem-generator {
       flex-direction: column;
       width: 100%; 
   }
 
   #input-container, #output-container {
-      width: 90%; 
+
       margin: 10px auto; 
   }
 
+  #output-container {
+    width: 500px;
+  }
+
   main {
-      margin: 10px;
+      margin: 20px;
   }
 
 }

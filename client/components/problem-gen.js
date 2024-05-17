@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { submitPrompt } from '../pages/api/api'; // Adjust the path as needed
+import SelectorButtons from '../components/SelectorButtons'; // Adjust the path as needed
 
 export default function ProblemGenerator() {
   const [difficulty, setDifficulty] = useState('default');
@@ -28,23 +30,13 @@ export default function ProblemGenerator() {
     setOutput('Generating...');
     const promptData = getValues();
 
-    const response = await fetch('http://localhost:4000/ask', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ promptData }),
-    });
-
-    if (!response.ok) {
-      setOutput(`Request failed with status: ${response.status}`);
-      return;
+    try {
+      const answer = await submitPrompt(promptData);
+      setOutput(answer);
+    } catch (error) {
+      setOutput(error.message);
     }
-
-    const data = await response.json();
-    setOutput(data.answer);
   };
-
 
   return (
     <div id="problem-generator">
@@ -71,34 +63,24 @@ export default function ProblemGenerator() {
           <div className="description">
             <p>Difficulty</p>
           </div>
-          <div className="selector-container difficulty">
-            {['Easy', 'Medium', 'Hard'].map((level) => (
-              <button
-                key={level}
-                className={`selector-button ${difficulty === level ? 'selected' : ''}`}
-                onClick={() => handleDifficultyClick(level)}
-              >
-                {level}
-              </button>
-            ))}
-          </div>
+          <SelectorButtons
+            type="difficulty"
+            options={['Easy', 'Medium', 'Hard']}
+            selectedOption={difficulty}
+            handleClick={handleDifficultyClick}
+          />
 
           <div className="separator"></div>
 
           <div className="description">
             <p>Story Problem?</p>
           </div>
-          <div className="selector-container story-problem">
-            {['Yes', 'No'].map((option) => (
-              <button
-                key={option}
-                className={`selector-button ${isStoryProb === option ? 'selected' : ''}`}
-                onClick={() => handleStoryProbClick(option)}
-              >
-                {option}
-              </button>
-            ))}
-          </div>
+          <SelectorButtons
+            type="story-problem"
+            options={['Yes', 'No']}
+            selectedOption={isStoryProb}
+            handleClick={handleStoryProbClick}
+          />
 
           <div className="separator"></div>
 
