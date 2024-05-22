@@ -1,36 +1,43 @@
 const OpenAI = require('openai').default;
 const fs = require('fs').promises;
 
-//for replit: key = process.env.OPENAI_API_KEY
+// Initialize the OpenAI client with your API key
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
 });
 
-async function generateProblem(userInput) {
-
+async function sendToOpenAi(userInput,promptFile) {
     try {
-        console.log('sending request');
-        // Read the prompt from the text file
-        const prompt = await fs.readFile('prompt.txt', 'utf8');
+        
+        console.log(`user input: ${userInput}`)
+        const prompt = await fs.readFile(promptFile, 'utf8');
 
+        const messages = ([
+            { role: "system", content: prompt },
+            { role: "user", content: JSON.stringify(userInput) }
+        ]);
 
+        //console.log("Generated JSON string: ", messages);
 
         const completion = await openai.chat.completions.create({
-            messages: [
-                {"role": "system", "content": prompt},
-                {"role": "user", "content": userInput}
-            ],
-            model: "gpt-3.5-turbo",
-            max_tokens: 100 
+            model: "gpt-4o",
+            messages: (messages),
+            //max_tokens: 100,
+            response_format:{type:"json_object"}
         });
-        response = completion.choices[0].message.content
-
-        return response        
-
+        console.log(completion)
+        
+        const response = completion.choices[0].message.content;
+        console.log(response)
+        return (response);
     } catch (error) {
         console.error('Error calling OpenAI API:', error);
+        throw error;
     }
-
 }
 
-module.exports = {generateProblem};
+async function generateProblem(userInput){
+    return sendToOpenAi(userInput,'formattedPrompt.txt')
+}
+
+module.exports = { generateProblem };

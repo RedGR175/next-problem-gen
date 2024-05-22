@@ -31,12 +31,12 @@ app.post('/ask', async (req, res) => {
     try {
         console.log(req.body.userInput)
         const response = await generateProblem(req.body.promptData)
-        res.json({ answer: response })
+        console.log('Type of response', typeof response)
+        res.json(JSON.parse(response))
 
     } catch (error) {
         console.log(`Error occured ${error}`)
         res.status(500).send('Internal Server Error')
-
     }
 });
 

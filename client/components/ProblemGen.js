@@ -1,12 +1,14 @@
-import { useEffect, useState } from 'react';
-import { submitPrompt } from '../pages/api/api'; // Adjust the path as needed
-import SelectorButtons from '../components/SelectorButtons'; // Adjust the path as needed
+import React, { useState } from 'react';
+import SelectorButtons from '../components/SelectorButtons';
+import { submitPrompt } from '../pages/api/api';
+import { RenderLatex } from './RenderLatex';
 
 export default function ProblemGenerator() {
+  const [needsDiagram, setNeedsDiagram] = useState('No');
   const [difficulty, setDifficulty] = useState('default');
   const [isStoryProb, setIsStoryProb] = useState('default');
-  const [userInput, setUserInput] = useState('');
-  const [output, setOutput] = useState('Output...');
+  const [userInput, setUserInput] = useState({});
+  const [output, setOutput] = useState({ problem: 'Output...', solution: '' });
 
   const handleDifficultyClick = (id) => {
     setDifficulty(id);
@@ -17,24 +19,33 @@ export default function ProblemGenerator() {
   };
 
   const handleInputChange = (event) => {
-    setUserInput(event.target.value);
+    const { name, value } = event.target;
+    setUserInput(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
   };
 
   const getValues = () => {
-    let promptData = userInput;
-    promptData += ` || Difficulty: ${difficulty} || Story Problem: ${isStoryProb}`;
-    return promptData;
+    return {
+      prompt: JSON.stringify(userInput),
+      difficulty: difficulty,
+      story_problem: isStoryProb,
+      needsDiagram: needsDiagram
+    };
   };
 
   const submit = async () => {
-    setOutput('Generating...');
+    setOutput({ problem: 'Generating...', solution: '' });
     const promptData = getValues();
 
     try {
-      const answer = await submitPrompt(promptData);
-      setOutput(answer);
+      const { problem, solution, diagram } = await submitPrompt(promptData);
+      setOutput({ problem, solution, diagram });
+      console.log(problem, solution, diagram)
     } catch (error) {
-      setOutput(error.message);
+      console.error('API Error:', error);
+      setOutput({ problem: error.message, solution: '' });
     }
   };
 
@@ -49,10 +60,10 @@ export default function ProblemGenerator() {
             <div id="text-input-container">
               <textarea
                 placeholder="Ex. Adding fractions"
-                name="user-input"
+                name="prompt"
                 id="user-input"
                 maxLength="100"
-                value={userInput}
+                value={userInput.prompt || ''}
                 onChange={handleInputChange}
               ></textarea>
             </div>
@@ -84,14 +95,43 @@ export default function ProblemGenerator() {
 
           <div className="separator"></div>
 
+          <div className="description">
+          <p>Diagram Needed?</p>
+          </div>
+          <SelectorButtons
+            type="diagram"
+            options={['Yes', 'No']}
+            selectedOption={needsDiagram}
+            handleClick={setNeedsDiagram}
+          />
+
+
           <button onClick={submit} id="submit-button">
             Generate
           </button>
         </div>
       </div>
       <div id="output-container">
-        <p id="output">{output}</p>
+        <div>
+          <p>Problem:</p>
+          <RenderLatex
+            latex={output.problem}
+          />
+        </div>
+        <div id='solution-container'>
+          <p>Solution:</p>
+          <RenderLatex
+            latex={output.solution}
+          />
+        </div>
+        <div id='solution-container'>
+          <p>Diagram</p>
+          <p>{output.diagram}</p>
+          
+        </div>
+
       </div>
+      
     </div>
   );
 }

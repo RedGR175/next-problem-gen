@@ -12,5 +12,6 @@ export const submitPrompt = async (promptData) => {
   }
 
   const data = await response.json();
-  return data.answer;
+  console.log(`Response from server `,data, typeof data)
+  return data;
 };

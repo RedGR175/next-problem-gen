@@ -26,7 +26,7 @@ main {
   justify-content: center;
   padding: 20px;
   margin: 5px;
-  height: 500px;
+  height: auto; /* Changed to auto to accommodate varying content heights */
 }
 
 #input-container {
@@ -40,8 +40,9 @@ main {
   align-items: center;
   max-width: 300px;
   height: auto;
-  padding: 5px;
+  padding: 20px; /* Increased padding for better spacing */
   margin-bottom: 10px; 
+  gap: 10px; /* Ensures space between child components */
 }
 
 #output-container {
@@ -54,30 +55,17 @@ main {
   align-content: start;
 }
 
-
 @media (max-width: 1000px) {
   #problem-generator {
-      flex-direction: column;
-      width: 100%; 
+    flex-direction: column;
+    width: 100%; 
   }
 
   #input-container, #output-container {
-
-      margin: 10px auto; 
+    margin: 10px auto; 
+    width: 95%; /* Make sure containers use available space */
   }
-
-  #output-container {
-    width: 500px;
-  }
-
-  main {
-      margin: 20px;
-  }
-
 }
-
-
-
 
 .selector-container {
   background-color: transparent;
@@ -88,6 +76,7 @@ main {
   justify-content: space-around;
   align-content: center;
   border: 3px solid rgba(200, 200, 200, 0.25);
+  width: 100%; /* Ensure full use of the container width */
 }
 
 .selector-button {
@@ -104,16 +93,15 @@ main {
 }
 
 .selector-button:hover {
-  background-color:  rgba(200, 200, 200, 0.25);
+  background-color: rgba(200, 200, 200, 0.25);
 }   
 
 .selector-button:active {
   border: none;
 }
 
-
 .option-box {
-  width: 80%;
+  width: 100%; /* Adjusted width for better fit */
 }
 
 .separator {
@@ -135,9 +123,8 @@ main {
   justify-content: space-around;
   align-content: center;
   border: 3px solid rgba(200, 200, 200, 0.25);
-  background-color: rgba(200, 200, 200, 0.4);;
+  background-color: rgba(200, 200, 200, 0.4);
   width: 100%;
-  display: flex;
   align-items: center;
   justify-content: center;
   font-size: larger;
@@ -149,6 +136,7 @@ main {
 #submit-button:hover {
   background-color: rgba(175, 175, 175, 0.4);
 }
+
 #submit-button:active {
   background-color: rgba(100, 100, 100, 0.6);
 }
@@ -161,26 +149,24 @@ main {
   justify-content: space-around;
   align-items: center; 
   border: 3px solid rgba(200, 200, 200, 0.25);
-  background-color: rgba(200, 200, 200, 0.4);;
+  background-color: rgba(200, 200, 200, 0.4);
   max-width: 240px;
   margin-bottom: 10px;
   padding: 5px;
   overflow: hidden;
 }
 
-
 #text-input-container textarea {
   background: transparent;
   border: none;
-  width: 90%;
+  width: 100%;
   font-size: large;
   outline: none;
   scrollbar-width: none;
   margin: auto;
   resize: none; 
+  margin: 5px;
 }
-
-
 
 .description {
   font-weight: bold;
@@ -188,7 +174,13 @@ main {
   margin-top: 10px;
 }
 
-h1 {
-  margin-bottom: 0px;
-  padding: 0px;
+#solution-container {
+  background-color: rgba(200, 200, 255, 0.2);
+  width: 90%;
+  padding: 20px;
+  margin: 10px;
+  border: 10px solid rgba(200, 200, 200, 0.25);
+  border-radius: 10px;
+  align-content: start;
+  margin-top: 20px; /* Adjust margin-top as needed */
 }
