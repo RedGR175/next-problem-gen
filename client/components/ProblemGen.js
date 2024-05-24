@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import SelectorButtons from '../components/SelectorButtons';
 import { submitPrompt } from '../pages/api/api';
 import { RenderLatex } from './RenderLatex';
+import { GetDiagram } from './GetDiagram';
 
 export default function ProblemGenerator() {
   const [needsDiagram, setNeedsDiagram] = useState('No');
   const [difficulty, setDifficulty] = useState('default');
   const [isStoryProb, setIsStoryProb] = useState('default');
   const [userInput, setUserInput] = useState({});
-  const [output, setOutput] = useState({ problem: 'Output...', solution: '' });
+  const [output, setOutput] = useState({ problem: 'Output...', solution: '', diagram: '', rendered: '' });
 
   const handleDifficultyClick = (id) => {
     setDifficulty(id);
@@ -36,19 +37,17 @@ export default function ProblemGenerator() {
   };
 
   const submit = async () => {
-    setOutput({ problem: 'Generating...', solution: '' });
+    setOutput({ problem: 'Generating...', solution: '', diagram: '', rendered: '' });
     const promptData = getValues();
-
     try {
       const { problem, solution, diagram } = await submitPrompt(promptData);
+      
       setOutput({ problem, solution, diagram });
-      console.log(problem, solution, diagram)
     } catch (error) {
       console.error('API Error:', error);
-      setOutput({ problem: error.message, solution: '' });
+      setOutput({ problem: error.message, solution: '', diagram: '', rendered: '' });
     }
   };
-
   return (
     <div id="problem-generator">
       <div id="input-container">
@@ -113,20 +112,21 @@ export default function ProblemGenerator() {
       </div>
       <div id="output-container">
         <div>
-          <p>Problem:</p>
+          <h5>Problem:</h5>
           <RenderLatex
             latex={output.problem}
           />
         </div>
         <div id='solution-container'>
-          <p>Solution:</p>
+          <h5>Solution:</h5>
           <RenderLatex
             latex={output.solution}
           />
         </div>
-        <div id='solution-container'>
-          <p>Diagram</p>
-          <p>{output.diagram}</p>
+        <div id='diagram-container'>
+          <GetDiagram
+            TikzCode={output.diagram}
+          />
           
         </div>
 
