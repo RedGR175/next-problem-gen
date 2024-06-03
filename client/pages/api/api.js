@@ -1,4 +1,4 @@
-const serverUrl = process.env.SERVER_URL || 'http://localhost:4000'
+const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:4000'
 
 export const submitPrompt = async (promptData) => {
   const response = await fetch(`${serverUrl}/ask`, {
