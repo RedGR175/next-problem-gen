@@ -15,6 +15,9 @@ app.use(express.static(__dirname + '/public'))
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
 
+app.get('/test', async (req, res) => {
+    return "hello world"
+});
 
 // Endpoint to handle questions
 app.post('/ask', async (req, res) => {
