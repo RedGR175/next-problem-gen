@@ -6,8 +6,7 @@ const cors = require('cors');
 const {generateProblem, renderDiagram} = require('./business.js')
 
 const app = express();
-const port = 4000;
-
+const port = process.env.PORT || 4000;
 app.use(cors())
 
 app.use(express.static(__dirname + '/public'))
@@ -16,7 +15,7 @@ app.use(express.static(__dirname + '/public'))
 app.use(bodyParser.json());
 
 app.get('/test', async (req, res) => {
-    return "hello world"
+    res.json("hello world")
 });
 
 // Endpoint to handle questions
