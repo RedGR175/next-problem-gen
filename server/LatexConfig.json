@@ -1,0 +1,9 @@
+{
+    "fsize": "12px",
+    "fcolor": "000000",
+    "mode": "0",
+    "out": "1",
+    "errors": "1",
+    "preamble": "\\usepackage{amsmath}\\usepackage{tikz}"
+}
+  
