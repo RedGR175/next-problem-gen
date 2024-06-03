@@ -1,5 +1,7 @@
+const serverUrl = process.env.SERVER_URL || 'http://localhost:4000'
+
 export const submitPrompt = async (promptData) => {
-  const response = await fetch('http://localhost:4000/ask', {
+  const response = await fetch(`${serverUrl}/ask`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -18,7 +20,7 @@ export const submitPrompt = async (promptData) => {
 
 export const getDiagram = async (latexCode) => {
   try {
-    const response = await fetch('http://localhost:4000/render', {
+    const response = await fetch(`${serverUrl}/render`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
