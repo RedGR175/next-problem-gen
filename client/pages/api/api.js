@@ -1,5 +1,6 @@
-const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:4000'
+const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:4000'  //sets the server URL to localhost if ran locally
 
+// Submits the prompt to the server
 export const submitPrompt = async (promptData) => {
   const response = await fetch(`${serverUrl}/ask`, {
     method: 'POST',
@@ -18,6 +19,7 @@ export const submitPrompt = async (promptData) => {
   return data;
 };
 
+// Sends request to server for diagram to be created
 export const getDiagram = async (latexCode) => {
   try {
     const response = await fetch(`${serverUrl}/render`, {

@@ -9,22 +9,19 @@ const openai = new OpenAI({
 });
 
 async function generateProblem(userInput) {
-    try {
-        
+    try { 
         console.log(`user input: ${userInput}`)
-        const prompt = await fs.readFile('formattedPrompt.txt', 'utf8');
+        const prompt = await fs.readFile('prompt.txt', 'utf8');  // Training prompt
 
         const messages = ([
             { role: "system", content: prompt },
             { role: "user", content: JSON.stringify(userInput) }
         ]);
 
-        //console.log("Generated JSON string: ", messages);
-
+        // Uses OpenAI API to generate problem
         const completion = await openai.chat.completions.create({
             model: "gpt-4o",
             messages: (messages),
-            //max_tokens: 100,
             response_format:{type:"json_object"}
         });
         console.log(completion)
@@ -40,7 +37,10 @@ async function generateProblem(userInput) {
     }
 }
 
+// Renders a Latex diagram using the quicklatex api
 async function renderDiagram(latexCode) {
+    
+    // Sets basic settings for the diagram
     const params = qs.stringify({
         'formula': latexCode,
         'fsize': '12px',
@@ -48,7 +48,7 @@ async function renderDiagram(latexCode) {
         'mode': '0',
         'out': '1',
         'errors': '1',
-        'preamble': '\\usepackage{amsmath}\\usepackage{tikz}\\usepackage{pgfplots}',
+        'preamble': '\\usepackage{amsmath}\\usepackage{tikz}\\usepackage{pgfplots}',  // Adds Latex packages to be used.  
         'rnd': Math.random()
     });
 
@@ -68,7 +68,7 @@ async function renderDiagram(latexCode) {
 
         // Extract URL from the response data
         const imageUrl = response.data.split("\n")[1].split(' ')[0].trim();
-         // Assuming the URL is always on the second line
+
         console.log("Rendered image URL:", imageUrl);
 
         return imageUrl; // Return only the URL

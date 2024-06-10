@@ -35,6 +35,7 @@ app.post('/ask', async (req, res) => {
     }
 });
 
+// Calls the renderDiagram function in business.js
 app.post('/render', async (req, res) => {
     console.log('request sent to index...')
 

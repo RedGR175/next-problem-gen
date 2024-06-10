@@ -1,9 +1,10 @@
-// components/SelectorButtons.js
 import React from 'react';
 
 export default function SelectorButtons({ type, options, selectedOption, handleClick }) {
+
+  // Creates buttons for each selection
   return (
-    <div className={`selector-container ${type}`}>
+    <div className={`selector-container ${type}`}> 
       {options.map((option) => (
         <button
           key={option}

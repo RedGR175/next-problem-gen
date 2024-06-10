@@ -11,11 +11,11 @@ export default function ProblemGenerator() {
   const [userInput, setUserInput] = useState({});
   const [output, setOutput] = useState({ problem: 'Output...', solution: '', diagram: '', rendered: '' });
 
-  const handleDifficultyClick = (id) => {
+  const handleDifficultyClick = (id) => { // Handles Difficulty selection
     setDifficulty(id);
   };
 
-  const handleStoryProbClick = (id) => {
+  const handleStoryProbClick = (id) => { // Handles Story Problem selection
     setIsStoryProb(id);
   };
 
@@ -27,7 +27,7 @@ export default function ProblemGenerator() {
     }));
   };
 
-  const getValues = () => {
+  const getValues = () => { // Finalizes data to be sent off
     return {
       prompt: JSON.stringify(userInput),
       difficulty: difficulty,
@@ -48,7 +48,7 @@ export default function ProblemGenerator() {
       setOutput({ problem: error.message, solution: '', diagram: '', rendered: '' });
     }
   };
-  return (
+  return ( // Main Website functionality
     <div id="problem-generator">
       <div id="input-container">
         <div className="option-box">
@@ -73,7 +73,7 @@ export default function ProblemGenerator() {
           <div className="description">
             <p>Difficulty</p>
           </div>
-          <SelectorButtons
+          <SelectorButtons // Selector buttons are made using SelectorButtons component
             type="difficulty"
             options={['Easy', 'Medium', 'Hard']}
             selectedOption={difficulty}
@@ -113,7 +113,7 @@ export default function ProblemGenerator() {
       <div id="output-container">
         <div>
           <h5>Problem:</h5>
-          <RenderLatex
+          <RenderLatex // Uses the RenderLatex component to render
             latex={output.problem}
           />
         </div>
@@ -124,7 +124,7 @@ export default function ProblemGenerator() {
           />
         </div>
         <div id='diagram-container'>
-          <GetDiagram
+          <GetDiagram // Gets diagram from a server function
             TikzCode={output.diagram}
           />
           
