@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SelectorButtons from '../components/SelectorButtons';
-import { submitPrompt } from '../pages/api/api';
+import { submitPrompt, addResult } from '../pages/api/api';
 import { RenderLatex } from './RenderLatex';
 import { GetDiagram } from './GetDiagram';
 

@@ -47,3 +47,58 @@ export const getDiagram = async (latexCode) => {
     throw error;  // Rethrow the error to handle it in the component
   }
 };
+
+export const getSavedResults = async () => {
+  try {
+    const response = await fetch(`${serverUrl}/getSavedResults`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      // Ensure the server expects an object with the key 'latexCode'
+    });
+
+    if (!response.ok) {
+      throw new Error(`Request failed with status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log(`Response from server:`, data);
+
+
+    return data.response;  
+  } catch (error) {
+    console.error('Error in fetching results:', error);
+    throw error;  // Rethrow the error to handle it in the component
+  }
+};
+
+export const addResult = async (result) => {
+  try {
+    const response = await fetch(`${serverUrl}/addResult`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      }, 
+      body: {
+        'problem':result.problem,
+        'solution':result.solution,
+        'diagram':result.diagram
+      }
+      // Ensure the server expects an object with the key 'latexCode'
+    });
+
+    if (!response.ok) {
+      throw new Error(`Request failed with status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log(`Response from server:`, data);
+
+
+    return data.response;  // Return the URL from the 'response' key
+  } catch (error) {
+    console.error('Error in fetching results:', error);
+    throw error;  // Rethrow the error to handle it in the component
+  }
+};
