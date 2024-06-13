@@ -3,12 +3,13 @@ import Link from 'next/link';
 import GetSavedResults from '../components/ResultContainer';
 
 const SavedResults = () => (
-    <div>
-        <Link href="/">
+    <main>
+        <Link href="/" className='link'>
             Home
         </Link>
         <GetSavedResults />
-    </div>
+        
+    </main>
 );
 
 export default SavedResults;

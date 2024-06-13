@@ -20,6 +20,17 @@ main {
   width: 1000px;
 }
 
+.link {
+  font-weight: bold;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  text-decoration: none;
+  color: rgb(32, 41, 32);
+  border-radius: 10px;
+  border: 2px solid rgba(32, 41, 32, 0.4);
+  padding: 5px;
+}
+
 #problem-generator {
   display: flex;
   width: 100%;
@@ -46,6 +57,7 @@ main {
 }
 
 #output-container {
+  position: relative;
   background-color: rgba(200, 200, 255, 0.2);
   width: 90%;
   padding: 20px;
@@ -56,17 +68,40 @@ main {
 }
 
 @media (max-width: 1000px) {
+  main {
+    width: 100%;
+  }
+
   #problem-generator {
     flex-direction: column;
-    width: 100%; 
+    width: 100%;
   }
 
   #input-container, #output-container {
-    margin: 10px auto; 
+    margin: 10px auto;
     width: 95%; /* Make sure containers use available space */
   }
 }
 
+@media (max-width: 600px) {
+  #input-container, #output-container {
+    width: 100%; /* Adjust width for very small screens */
+    padding: 10px; /* Reduce padding for smaller screens */
+  }
+  
+  .selector-container, #submit-button, #save-button, #text-input-container {
+    width: 100%;
+    padding: 10px;
+  }
+  
+  main {
+    width: 80vw;
+    align-self: center;
+  }
+  .title-description {
+    text-align: center;
+  }
+}
 .selector-container {
   background-color: transparent;
   padding: 0px;
@@ -150,7 +185,7 @@ main {
   align-items: center; 
   border: 3px solid rgba(200, 200, 200, 0.25);
   background-color: rgba(200, 200, 200, 0.4);
-  max-width: 240px;
+  max-width: 100%;
   margin-bottom: 10px;
   padding: 5px;
   overflow: hidden;
@@ -184,3 +219,154 @@ main {
   align-content: start;
   margin-top: 20px; /* Adjust margin-top as needed */
 }
+
+.result-item {
+  background-color: rgba(200, 200, 255, 0.2);
+  width: 500px;
+  padding: 20px;
+  margin: 10px;
+  border: 10px solid rgba(200, 200, 200, 0.25);
+  border-radius: 10px;
+  align-content: start;
+  position: relative;
+  transition: all 1s;
+}
+
+.result-item.removing {
+  animation: hideResult 1s normal;
+}
+
+@keyframes hideResult {
+  0% {
+    opacity: 1;
+    max-height: 1000px;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    max-height: 0;
+    opacity: 0;
+    
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@keyframes hideButton {
+  0% {
+    color: inherit;
+    width: 120px;
+  }
+  50% {
+    color: transparent;
+    width: 120px;
+  }
+  100% {
+    color: transparent;
+    width: 0;
+    height: 0;
+  }
+}
+
+@keyframes showButton {
+  0% {
+    color: transparent;
+    width: 0;
+    height: 0;
+  }
+  50% {
+    color: transparent;
+    width: 120px;
+  }
+  100% {
+    color: inherit;
+    width: 120px;
+  }
+}
+
+#save-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: transparent;
+  padding: 0px;
+  height: 40px;
+  border-radius: 30px;
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  border: 3px solid rgba(200, 200, 200, 0.25);
+  background-color: rgba(200, 200, 200, 0.4);
+  width: 120px;
+  align-items: center;
+  justify-content: center;  
+  transition: all 1s;
+  margin: 15px;
+  cursor: pointer;
+}
+
+#save-button:hover {
+  background-color: rgba(175, 175, 175, 0.4);
+}
+
+#save-button:active {
+  background-color: rgba(100, 100, 100, 0.6);
+}
+
+#save-button:disabled {
+  animation: hideButton 1s forwards;
+  pointer-events: none;
+}
+
+#save-button:enabled {
+  animation: showButton 1s forwards;
+  pointer-events: auto;
+}
+
+#save-button-container {
+  bottom: 0;
+  height: 40px;
+  margin: 5px;
+  
+}
+
+
+
+#diagram-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#delete-button {
+  border: none;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 5px;
+}
+
+#delete-button:hover {
+  animation: deleteButton 300ms alternate;
+  animation-iteration-count: infinite;
+}
+
+#delete-button:active {
+  font-size: 10px;
+  font-weight: bold;
+}
+
+
+@keyframes deleteButton {
+  0% {
+    margin-top: 5px;
+  } 
+  100% {
+    margin-top: 2px;
+  }
+}
+

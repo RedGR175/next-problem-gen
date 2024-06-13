@@ -9,7 +9,9 @@ export default function ProblemGenerator() {
   const [difficulty, setDifficulty] = useState('default');
   const [isStoryProb, setIsStoryProb] = useState('default');
   const [userInput, setUserInput] = useState({});
-  const [output, setOutput] = useState({ problem: 'Output...', solution: '', diagram: '', rendered: '' });
+  const [output, setOutput] = useState({ problem: '', solution: '', diagram: '', rendered: '' });
+  const [generating, setGenerating] = useState(false);
+  const [saved, setSaved] = useState(true);
 
   const handleDifficultyClick = (id) => { // Handles Difficulty selection
     setDifficulty(id);
@@ -37,17 +39,32 @@ export default function ProblemGenerator() {
   };
 
   const submit = async () => {
+    setGenerating(true);
     setOutput({ problem: 'Generating...', solution: '', diagram: '', rendered: '' });
     const promptData = getValues();
     try {
       const { problem, solution, diagram } = await submitPrompt(promptData);
-      
       setOutput({ problem, solution, diagram });
     } catch (error) {
       console.error('API Error:', error);
       setOutput({ problem: error.message, solution: '', diagram: '', rendered: '' });
+    } finally {
+      setGenerating(false);
+      setSaved(false)
     }
   };
+
+  const handleSave = async () => {
+    try {
+      setSaved(true);
+      const response = await addResult(output);
+      console.log('Save result response:', response);
+    } catch (error) {
+      setSaved(false);
+      console.error('Error saving result:', error);
+    }
+  };
+
   return ( // Main Website functionality
     <div id="problem-generator">
       <div id="input-container">
@@ -104,8 +121,7 @@ export default function ProblemGenerator() {
             handleClick={setNeedsDiagram}
           />
 
-
-          <button onClick={submit} id="submit-button">
+          <button onClick={submit} id="submit-button" disabled={generating}>
             Generate
           </button>
         </div>
@@ -130,6 +146,9 @@ export default function ProblemGenerator() {
           
         </div>
 
+        <div id='save-button-container'>
+          <button id='save-button' onClick={handleSave} disabled={saved}>Save Result</button>
+        </div>
       </div>
       
     </div>

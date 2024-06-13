@@ -1,27 +1,28 @@
-// ResultContainer.js
 import React, { useState, useEffect } from 'react';
 import { getSavedResults } from '../pages/api/api';
 import ResultItem from './ResultItem';
 
 const GetSavedResults = () => {
-    const [json, setJson] = useState('');
+    const [items, setItems] = useState([]);
 
     useEffect(() => {
         const fetchSavedResults = async () => {
             const response = await getSavedResults();
-            setJson(JSON.stringify(response, null, 2));
+            setItems(response);
         };
 
         fetchSavedResults();
     }, []);
 
-    const parsedJson = json ? JSON.parse(json) : [];
+    const handleDelete = (id) => {
+        setItems(prevItems => prevItems.filter(item => item.id !== id));
+    };
 
     return (
         <div>
-            {parsedJson.length > 0 ? (
-                parsedJson.map(item => (
-                    <ResultItem key={item.id} item={item} />
+            {items.length > 0 ? (
+                items.map(item => (
+                    <ResultItem key={item.id} item={item} onDelete={handleDelete} />
                 ))
             ) : (
                 <p>No results found.</p>

@@ -5,8 +5,8 @@ make sure there arent lines without use such as a line away from the shape
 The response should be formatted like this:
 
 {
-    problem: "generated problem goes here",
-    solution: "concise answer to problem here",
+    problem: "generated problem with latex equations",
+    solution: "concise answer to problem with latex here",
     diagram: "latex code for diagram using tikz"
 }
 

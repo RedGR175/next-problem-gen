@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const OpenAI = require('openai').default;
 const fs = require('fs').promises;
 const qs = require('qs')
