@@ -1,0 +1,6 @@
+OPENAI_API_KEY=''
+
+user=''
+host=''
+database=''
+password=''
