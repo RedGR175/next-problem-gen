@@ -7,7 +7,10 @@ const SavedResults = () => (
     <Link href="/" className="link">
       Home
     </Link>
+    <h2>Saved Results</h2>
+    <p>This is where results saved from anyone will go</p>
     <GetSavedResults />
+    <p className="description">You've Reached the end!</p>
   </main>
 );
 

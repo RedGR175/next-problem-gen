@@ -5,18 +5,13 @@
 
 body,
 html {
-  background-image: linear-gradient(
-    to right,
-    rgb(41, 132, 148),
-    rgb(84, 173, 84)
-  );
+  background-image: linear-gradient(to right, rgb(41, 132, 148), rgb(84, 173, 84));
   display: flex;
   justify-content: center;
   color: black;
   height: 100%;
   width: 100%;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 main {
@@ -43,13 +38,13 @@ main {
   justify-content: center;
   padding: 20px;
   margin: 5px;
-  height: auto; /* Changed to auto to accommodate varying content heights */
+  height: auto;
 }
 
 #input-container {
   background-color: rgba(255, 255, 255, 0.2);
   border: 5px solid rgba(255, 255, 255, 0.25);
-  border-radius: 5px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -57,9 +52,9 @@ main {
   align-items: center;
   max-width: 300px;
   height: auto;
-  padding: 20px; /* Increased padding for better spacing */
+  padding: 20px;
   margin-bottom: 10px;
-  gap: 10px; /* Ensures space between child components */
+  gap: 15px;
 }
 
 #output-container {
@@ -86,15 +81,16 @@ main {
   #input-container,
   #output-container {
     margin: 10px auto;
-    width: 95%; /* Make sure containers use available space */
+    width: 95%;
   }
 }
 
 @media (max-width: 600px) {
   #input-container,
   #output-container {
-    width: 100%; /* Adjust width for very small screens */
-    padding: 10px; /* Reduce padding for smaller screens */
+    width: 100%;
+    padding: 10px;
+    height: 500px;
   }
 
   .selector-container,
@@ -106,23 +102,26 @@ main {
   }
 
   main {
-    width: 80vw;
+    width: 90vw;
     align-self: center;
+    padding-bottom: 20px;
   }
+
   .title-description {
     text-align: center;
   }
 }
+
 .selector-container {
   background-color: transparent;
-  padding: 0px;
+  padding: 5px;
   height: 50px;
   border-radius: 30px;
   display: flex;
   justify-content: space-around;
   align-content: center;
   border: 3px solid rgba(200, 200, 200, 0.25);
-  width: 100%; /* Ensure full use of the container width */
+  width: 100%;
 }
 
 .selector-button {
@@ -136,7 +135,12 @@ main {
   padding: 10px;
   outline: none;
   transition: all 0.4s ease-in;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  text-align: center;
 }
+
 
 .selector-button:hover {
   background-color: rgba(200, 200, 200, 0.25);
@@ -147,7 +151,7 @@ main {
 }
 
 .option-box {
-  width: 100%; /* Adjusted width for better fit */
+  width: 100%;
 }
 
 .separator {
@@ -161,15 +165,14 @@ main {
 }
 
 #submit-button {
-  background-color: transparent;
-  padding: 0px;
+  background-color: rgba(200, 200, 200, 0.4);
+  padding: 10px;
   height: 50px;
   border-radius: 30px;
   display: flex;
   justify-content: space-around;
   align-content: center;
   border: 3px solid rgba(200, 200, 200, 0.25);
-  background-color: rgba(200, 200, 200, 0.4);
   width: 100%;
   align-items: center;
   justify-content: center;
@@ -188,14 +191,13 @@ main {
 }
 
 #text-input-container {
-  background-color: transparent;
+  background-color: rgba(200, 200, 200, 0.4);
   min-height: 40px;
   border-radius: 30px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   border: 3px solid rgba(200, 200, 200, 0.25);
-  background-color: rgba(200, 200, 200, 0.4);
   max-width: 100%;
   margin-bottom: 10px;
   padding: 5px;
@@ -228,14 +230,14 @@ main {
   border: 10px solid rgba(200, 200, 200, 0.25);
   border-radius: 10px;
   align-content: start;
-  margin-top: 20px; /* Adjust margin-top as needed */
+  margin-top: 20px;
 }
 
 .result-item {
   background-color: rgba(200, 200, 255, 0.2);
-  width: 500px;
+  max-width: 500;
   padding: 20px;
-  margin: 10px;
+  margin-top: 10px;
   border: 10px solid rgba(200, 200, 200, 0.25);
   border-radius: 10px;
   align-content: start;
@@ -260,7 +262,6 @@ main {
   100% {
     max-height: 0;
     opacity: 0;
-
     margin: 0;
     padding: 0;
   }
@@ -302,15 +303,14 @@ main {
   position: absolute;
   bottom: 0;
   right: 0;
-  background-color: transparent;
-  padding: 0px;
+  background-color: rgba(200, 200, 200, 0.4);
+  padding: 10px;
   height: 40px;
   border-radius: 30px;
   display: flex;
   justify-content: space-around;
   align-content: center;
   border: 3px solid rgba(200, 200, 200, 0.25);
-  background-color: rgba(200, 200, 200, 0.4);
   width: 120px;
   align-items: center;
   justify-content: center;

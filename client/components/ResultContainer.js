@@ -25,7 +25,7 @@ const GetSavedResults = () => {
   return (
     <div>
       {items.length > 0 ? (
-        items.map((item) => (
+        items.slice().sort((a, b) => b.id - a.id).map((item) => (
           <ResultItem key={item.id} item={item} onDelete={handleDelete} />
         ))
       ) : (
