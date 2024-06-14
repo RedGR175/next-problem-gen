@@ -1,20 +1,27 @@
-import { Inter } from 'next/font/google';
-import ProblemGenerator from '../components/ProblemGen';
-import Link from 'next/link';
+import { Inter } from "next/font/google";
+import ProblemGenerator from "../components/ProblemGen";
+import Link from "next/link";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
     <main>
-      <Link href="/about">
-        <p>AboutPage</p>
-      </Link>
+        <Link href="/savedResults" className="link">
+          <p>Saved Results Page</p>
+        </Link> 
+        
       <h1>AI Problem Generator</h1>
-      <div className="description">
-        <p>This is an AI Problem Generator. It creates problems from a simple text prompt.</p>
+      <div className="title-description">
+        <p>
+          This is an AI Problem Generator. It creates problems from a simple
+          text prompt.
+        </p>
       </div>
       <ProblemGenerator />
+      <Link href='https://github.com/RedGR175/next-problem-gen' className="link">
+        Github Page
+      </Link>
     </main>
   );
 }

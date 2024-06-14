@@ -1,16 +1,22 @@
 * {
   margin: 0;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 
-body, html {
-  background-image: linear-gradient(to right, rgb(41, 132, 148), rgb(84, 173, 84));
+body,
+html {
+  background-image: linear-gradient(
+    to right,
+    rgb(41, 132, 148),
+    rgb(84, 173, 84)
+  );
   display: flex;
   justify-content: center;
   color: black;
-  height: 100%;
+  height: 100vh;
   width: 100%;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 main {
@@ -20,19 +26,30 @@ main {
   width: 1000px;
 }
 
-#problem-generator {
+.link {
+  font-weight: bold;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  text-decoration: none;
+  color: rgb(32, 41, 32);
+  border-radius: 10px;
+  border: 2px solid rgba(32, 41, 32, 0.4);
+  padding: 5px;
+}
+
+.problem-generator {
   display: flex;
   width: 100%;
   justify-content: center;
   padding: 20px;
   margin: 5px;
-  height: auto; /* Changed to auto to accommodate varying content heights */
+  height: auto;
 }
 
-#input-container {
+.input-container {
   background-color: rgba(255, 255, 255, 0.2);
   border: 5px solid rgba(255, 255, 255, 0.25);
-  border-radius: 5px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -40,12 +57,13 @@ main {
   align-items: center;
   max-width: 300px;
   height: auto;
-  padding: 20px; /* Increased padding for better spacing */
-  margin-bottom: 10px; 
-  gap: 10px; /* Ensures space between child components */
+  padding: 20px;
+  margin-bottom: 10px;
+  gap: 15px;
 }
 
-#output-container {
+.output-container {
+  position: relative;
   background-color: rgba(200, 200, 255, 0.2);
   width: 90%;
   padding: 20px;
@@ -56,52 +74,102 @@ main {
 }
 
 @media (max-width: 1000px) {
-  #problem-generator {
-    flex-direction: column;
-    width: 100%; 
+  main {
+    width: 100%;
   }
 
-  #input-container, #output-container {
-    margin: 10px auto; 
-    width: 95%; /* Make sure containers use available space */
+  .problem-generator {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .input-container,
+  .output-container {
+    margin: 10px auto;
+    width: 95%;
+  }
+}
+
+@media (max-width: 600px) {
+  .input-container,
+  .output-container {
+    width: 100%;
+    padding: 10px;
+    min-height: 500px;
+  }
+
+  .selector-container,
+  .submit-button,
+  .save-button,
+  .text-input-container {
+    width: 100%;
+    padding: 10px;
+  }
+
+  main {
+    width: 90vw;
+    align-self: center;
+    padding-bottom: 20px;
+  }
+
+  .title-description {
+    text-align: center;
+  }
+
+  .diagram {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: 0 auto;
   }
 }
 
 .selector-container {
   background-color: transparent;
-  padding: 0px;
+  padding: 5px;
   height: 50px;
   border-radius: 30px;
   display: flex;
   justify-content: space-around;
   align-content: center;
   border: 3px solid rgba(200, 200, 200, 0.25);
-  width: 100%; /* Ensure full use of the container width */
+  width: 100%;
 }
 
 .selector-button {
-  border: 3px solid transparent; 
+  border: 3px solid transparent;
   flex: 1;
   margin: 0px;
   border-radius: 25px;
   cursor: pointer;
   background: none;
   font-size: large;
-  padding: 10px; 
+  padding: 10px;
   outline: none;
   transition: all 0.4s ease-in;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: black;
 }
 
 .selector-button:hover {
   background-color: rgba(200, 200, 200, 0.25);
-}   
+}
 
 .selector-button:active {
-  border: none;
+  border: 3px solid transparent;
+}
+
+textarea::placeholder {
+  color: rgb(53, 52, 52);
 }
 
 .option-box {
-  width: 100%; /* Adjusted width for better fit */
+  width: 100%;
 }
 
 .separator {
@@ -114,16 +182,15 @@ main {
   border: 3px solid rgba(200, 200, 200, 0.25);
 }
 
-#submit-button {
-  background-color: transparent;
-  padding: 0px;
+.submit-button {
+  background-color: rgba(200, 200, 200, 0.4);
+  padding: 10px;
   height: 50px;
   border-radius: 30px;
   display: flex;
   justify-content: space-around;
   align-content: center;
   border: 3px solid rgba(200, 200, 200, 0.25);
-  background-color: rgba(200, 200, 200, 0.4);
   width: 100%;
   align-items: center;
   justify-content: center;
@@ -131,32 +198,32 @@ main {
   transition: all 0.2s;
   margin-top: 15px;
   cursor: pointer;
+  color: black;
 }
 
-#submit-button:hover {
+.submit-button:hover {
   background-color: rgba(175, 175, 175, 0.4);
 }
 
-#submit-button:active {
+.submit-button:active {
   background-color: rgba(100, 100, 100, 0.6);
 }
 
-#text-input-container {
-  background-color: transparent;
+.text-input-container {
+  background-color: rgba(200, 200, 200, 0.4);
   min-height: 40px;
   border-radius: 30px;
   display: flex;
   justify-content: space-around;
-  align-items: center; 
+  align-items: center;
   border: 3px solid rgba(200, 200, 200, 0.25);
-  background-color: rgba(200, 200, 200, 0.4);
-  max-width: 240px;
+  max-width: 100%;
   margin-bottom: 10px;
   padding: 5px;
   overflow: hidden;
 }
 
-#text-input-container textarea {
+.text-input-container textarea {
   background: transparent;
   border: none;
   width: 100%;
@@ -164,7 +231,7 @@ main {
   outline: none;
   scrollbar-width: none;
   margin: auto;
-  resize: none; 
+  resize: none;
   margin: 5px;
 }
 
@@ -174,7 +241,7 @@ main {
   margin-top: 10px;
 }
 
-#solution-container {
+.solution-container {
   background-color: rgba(200, 200, 255, 0.2);
   width: 90%;
   padding: 20px;
@@ -182,5 +249,151 @@ main {
   border: 10px solid rgba(200, 200, 200, 0.25);
   border-radius: 10px;
   align-content: start;
-  margin-top: 20px; /* Adjust margin-top as needed */
+  margin-top: 20px;
+}
+
+.result-item {
+  background-color: rgba(200, 200, 255, 0.2);
+  max-width: 500;
+  padding: 20px;
+  margin-top: 10px;
+  border: 10px solid rgba(200, 200, 200, 0.25);
+  border-radius: 10px;
+  align-content: start;
+  position: relative;
+  transition: all 1s;
+}
+
+.result-item.removing {
+  animation: hideResult 1s normal;
+}
+
+@keyframes hideResult {
+  0% {
+    opacity: 1;
+    max-height: 1000px;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    max-height: 0;
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@keyframes hideButton {
+  0% {
+    color: inherit;
+    width: 120px;
+  }
+  50% {
+    color: transparent;
+    width: 120px;
+  }
+  100% {
+    color: transparent;
+    width: 0;
+    height: 0;
+  }
+}
+
+@keyframes showButton {
+  0% {
+    color: transparent;
+    width: 0;
+    height: 0;
+  }
+  50% {
+    color: transparent;
+    width: 120px;
+  }
+  100% {
+    color: inherit;
+    width: 120px;
+  }
+}
+
+.save-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(200, 200, 200, 0.4);
+  padding: 10px;
+  height: 40px;
+  border-radius: 30px;
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  border: 3px solid rgba(200, 200, 200, 0.25);
+  width: 120px;
+  align-items: center;
+  justify-content: center;
+  transition: all 1s;
+  margin: 15px;
+  cursor: pointer;
+}
+
+.save-button:hover {
+  background-color: rgba(175, 175, 175, 0.4);
+}
+
+.save-button:active {
+  background-color: rgba(100, 100, 100, 0.6);
+}
+
+.save-button:disabled {
+  animation: hideButton 1s forwards;
+  pointer-events: none;
+}
+
+.save-button:enabled {
+  animation: showButton 1s forwards;
+  pointer-events: auto;
+}
+
+.save-button-container {
+  bottom: 0;
+  height: 40px;
+  margin: 10px;
+}
+
+.diagram-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+}
+
+.delete-button {
+  border: none;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 5px;
+  color: black;
+}
+
+.delete-button:hover {
+  animation: deleteButton 300ms alternate;
+  animation-iteration-count: infinite;
+}
+
+.delete-button:active {
+  font-size: 10px;
+  font-weight: bold;
+}
+
+@keyframes deleteButton {
+  0% {
+    margin-top: 5px;
+  }
+  100% {
+    margin-top: 2px;
+  }
 }

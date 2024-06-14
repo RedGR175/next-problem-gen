@@ -1,68 +1,94 @@
-import React, { useState } from 'react';
-import SelectorButtons from '../components/SelectorButtons';
-import { submitPrompt } from '../pages/api/api';
-import { RenderLatex } from './RenderLatex';
-import { GetDiagram } from './GetDiagram';
+import React, { useState } from "react";
+import SelectorButtons from "../components/SelectorButtons";
+import { submitPrompt, addResult } from "../pages/api/api";
+import { RenderLatex } from "./RenderLatex";
+import { GetDiagram } from "./GetDiagram";
 
 export default function ProblemGenerator() {
-  const [needsDiagram, setNeedsDiagram] = useState('No');
-  const [difficulty, setDifficulty] = useState('default');
-  const [isStoryProb, setIsStoryProb] = useState('default');
+  const [needsDiagram, setNeedsDiagram] = useState("No");
+  const [difficulty, setDifficulty] = useState("default");
+  const [isStoryProb, setIsStoryProb] = useState("default");
   const [userInput, setUserInput] = useState({});
-  const [output, setOutput] = useState({ problem: 'Output...', solution: '', diagram: '', rendered: '' });
+  const [output, setOutput] = useState({
+    problem: "",
+    solution: "",
+    diagram: "",
+    rendered: "",
+  });
+  const [generating, setGenerating] = useState(false);
+  const [saved, setSaved] = useState(true);
 
-  const handleDifficultyClick = (id) => {
-    setDifficulty(id);
-  };
+  const handleDifficultyClick = (className) => setDifficulty(className);
 
-  const handleStoryProbClick = (id) => {
-    setIsStoryProb(id);
-  };
+  const handleStoryProbClick = (className) => setIsStoryProb(className);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setUserInput(prevState => ({
+    setUserInput((prevState) => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
   };
 
-  const getValues = () => {
-    return {
-      prompt: JSON.stringify(userInput),
-      difficulty: difficulty,
-      story_problem: isStoryProb,
-      needsDiagram: needsDiagram
-    };
-  };
+  const getValues = () => ({
+    prompt: JSON.stringify(userInput),
+    difficulty: difficulty,
+    story_problem: isStoryProb,
+    needsDiagram: needsDiagram,
+  });
 
   const submit = async () => {
-    setOutput({ problem: 'Generating...', solution: '', diagram: '', rendered: '' });
+    setGenerating(true);
+    setOutput({
+      problem: "Generating...",
+      solution: "",
+      diagram: "",
+      rendered: "",
+    });
     const promptData = getValues();
     try {
       const { problem, solution, diagram } = await submitPrompt(promptData);
-      
       setOutput({ problem, solution, diagram });
     } catch (error) {
-      console.error('API Error:', error);
-      setOutput({ problem: error.message, solution: '', diagram: '', rendered: '' });
+      console.error("API Error:", error);
+      setOutput({
+        problem: error.message,
+        solution: "",
+        diagram: "",
+        rendered: "",
+      });
+    } finally {
+      setGenerating(false);
+      setSaved(false);
     }
   };
+
+  const handleSave = async () => {
+    try {
+      setSaved(true);
+      const response = await addResult(output);
+      console.log("Save result response:", response);
+    } catch (error) {
+      setSaved(false);
+      console.error("Error saving result:", error);
+    }
+  };
+
   return (
-    <div id="problem-generator">
-      <div id="input-container">
+    <div className="problem-generator">
+      <div className="input-container">
         <div className="option-box">
           <div className="input-box">
             <div className="description">
               <p>Prompt Input</p>
             </div>
-            <div id="text-input-container">
+            <div className="text-input-container">
               <textarea
                 placeholder="Ex. Adding fractions"
                 name="prompt"
-                id="user-input"
+                className="user-input"
                 maxLength="100"
-                value={userInput.prompt || ''}
+                value={userInput.prompt || ""}
                 onChange={handleInputChange}
               ></textarea>
             </div>
@@ -75,7 +101,7 @@ export default function ProblemGenerator() {
           </div>
           <SelectorButtons
             type="difficulty"
-            options={['Easy', 'Medium', 'Hard']}
+            options={["Easy", "Medium", "Hard"]}
             selectedOption={difficulty}
             handleClick={handleDifficultyClick}
           />
@@ -87,7 +113,7 @@ export default function ProblemGenerator() {
           </div>
           <SelectorButtons
             type="story-problem"
-            options={['Yes', 'No']}
+            options={["Yes", "No"]}
             selectedOption={isStoryProb}
             handleClick={handleStoryProbClick}
           />
@@ -95,43 +121,39 @@ export default function ProblemGenerator() {
           <div className="separator"></div>
 
           <div className="description">
-          <p>Diagram Needed?</p>
+            <p>Diagram Needed?</p>
           </div>
           <SelectorButtons
             type="diagram"
-            options={['Yes', 'No']}
+            options={["Yes", "No"]}
             selectedOption={needsDiagram}
             handleClick={setNeedsDiagram}
           />
 
-
-          <button onClick={submit} id="submit-button">
+          <button onClick={submit} className="submit-button" disabled={generating}>
             Generate
           </button>
         </div>
       </div>
-      <div id="output-container">
+      <div className="output-container">
         <div>
           <h5>Problem:</h5>
-          <RenderLatex
-            latex={output.problem}
-          />
+          <RenderLatex latex={output.problem} />
         </div>
-        <div id='solution-container'>
+        <div className="solution-container">
           <h5>Solution:</h5>
-          <RenderLatex
-            latex={output.solution}
-          />
+          <RenderLatex latex={output.solution} />
         </div>
-        <div id='diagram-container'>
-          <GetDiagram
-            TikzCode={output.diagram}
-          />
-          
+        <div className="diagram-container">
+          <GetDiagram tikzCode={output.diagram} />
         </div>
 
+        <div className="save-button-container">
+          <button className="save-button" onClick={handleSave} disabled={saved}>
+            Save Result
+          </button>
+        </div>
       </div>
-      
     </div>
   );
 }

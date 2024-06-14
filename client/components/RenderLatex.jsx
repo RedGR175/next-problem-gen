@@ -3,10 +3,8 @@ import "katex/dist/katex.min.css";
 import { InlineMath } from "react-katex";
 import sanitizeHtml from "sanitize-html";
 
-
-
 export const RenderLatex = ({ latex }) => {
-  console.log(latex)
+  console.log(latex);
   // Function to safely sanitize non-math text
   const sanitizeText = (text) => {
     return sanitizeHtml(text, {
@@ -71,5 +69,5 @@ export const RenderLatex = ({ latex }) => {
     }
   };
 
-  return <div className="snorkl-latex-renderer">{render(latex)}</div>;
+  return <div className="npg-latex-renderer">{render(latex)}</div>;
 };
