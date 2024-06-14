@@ -1,12 +1,12 @@
 .snorkl-latex-renderer {
-    overflow-x: auto;
-    @apply whitespace-pre-wrap
+  overflow-x: auto;
+  @apply whitespace-pre-wrap;
 }
 
 .snorkl-latex-renderer .katex-display {
-    text-align: left;
+  text-align: left;
 }
 
 .snorkl-latex-renderer .katex-display > .katex {
-    text-align: left;
+  text-align: left;
 }
