@@ -139,6 +139,7 @@ main {
   align-items: center;
   justify-content: center; 
   text-align: center;
+  color:black;
 }
 
 
@@ -148,6 +149,10 @@ main {
 
 .selector-button:active {
   border: none;
+}
+
+textarea::placeholder {
+  color: rgb(53, 52, 52);
 }
 
 .option-box {
