@@ -7,9 +7,10 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   return (
     <main>
-      <Link href="/savedResults" className="link">
-        <p>Saved Results Page</p>
-      </Link>
+        <Link href="/savedResults" className="link">
+          <p>Saved Results Page</p>
+        </Link> 
+        
       <h1>AI Problem Generator</h1>
       <div className="title-description">
         <p>
@@ -18,6 +19,9 @@ export default function Home() {
         </p>
       </div>
       <ProblemGenerator />
+      <Link href='https://github.com/RedGR175/next-problem-gen' className="link">
+        Github Page
+      </Link>
     </main>
   );
 }

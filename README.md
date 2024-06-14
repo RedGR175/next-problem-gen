@@ -42,3 +42,11 @@ cd client
 npm run dev
 ```
 Now navigate to localhost:3000 in your browser
+
+#### 5. Extra steps (Optional): 
+    - Connect a Database
+    - Link to cloud service (Vercel, Render, etc.)
+
+# Contributing
+
+Contributions are welcome! Feel free to open an issue or submit a pull request.

@@ -15,5 +15,5 @@ export const GetDiagram = ({ tikzCode }) => {
     fetchDiagram();
   }, [tikzCode]);
 
-  return renderedUrl ? <img src={renderedUrl} alt="Rendered Diagram" /> : null;
+  return renderedUrl ? <img src={renderedUrl} alt="Rendered Diagram" className="diagram" /> : null;
 };
