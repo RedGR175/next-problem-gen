@@ -16,19 +16,19 @@ const ResultItem = ({ item, onDelete }) => {
 
   return (
     <div id={`result-item-${item.id}`} className="result-item">
-      <button id="delete-button" onClick={handleDelete}>
+      <button className="delete-button" onClick={handleDelete}>
         ✘
       </button>
       <div>
         <h5>Problem:</h5>
         <RenderLatex latex={item.problem} />
       </div>
-      <div id="solution-container">
+      <div className="solution-container">
         <h5>Solution:</h5>
         <RenderLatex latex={item.solution} />
       </div>
-      <div id="diagram-container">
-        <GetDiagram TikzCode={item.diagram} />
+      <div className="diagram-container">
+        <GetDiagram tikzCode={item.diagram} />
       </div>
     </div>
   );

@@ -18,9 +18,9 @@ export default function ProblemGenerator() {
   const [generating, setGenerating] = useState(false);
   const [saved, setSaved] = useState(true);
 
-  const handleDifficultyClick = (id) => setDifficulty(id);
+  const handleDifficultyClick = (className) => setDifficulty(className);
 
-  const handleStoryProbClick = (id) => setIsStoryProb(id);
+  const handleStoryProbClick = (className) => setIsStoryProb(className);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -75,18 +75,18 @@ export default function ProblemGenerator() {
   };
 
   return (
-    <div id="problem-generator">
-      <div id="input-container">
+    <div className="problem-generator">
+      <div className="input-container">
         <div className="option-box">
           <div className="input-box">
             <div className="description">
               <p>Prompt Input</p>
             </div>
-            <div id="text-input-container">
+            <div className="text-input-container">
               <textarea
                 placeholder="Ex. Adding fractions"
                 name="prompt"
-                id="user-input"
+                className="user-input"
                 maxLength="100"
                 value={userInput.prompt || ""}
                 onChange={handleInputChange}
@@ -130,26 +130,26 @@ export default function ProblemGenerator() {
             handleClick={setNeedsDiagram}
           />
 
-          <button onClick={submit} id="submit-button" disabled={generating}>
+          <button onClick={submit} className="submit-button" disabled={generating}>
             Generate
           </button>
         </div>
       </div>
-      <div id="output-container">
+      <div className="output-container">
         <div>
           <h5>Problem:</h5>
           <RenderLatex latex={output.problem} />
         </div>
-        <div id="solution-container">
+        <div className="solution-container">
           <h5>Solution:</h5>
           <RenderLatex latex={output.solution} />
         </div>
-        <div id="diagram-container">
-          <GetDiagram TikzCode={output.diagram} />
+        <div className="diagram-container">
+          <GetDiagram tikzCode={output.diagram} />
         </div>
 
-        <div id="save-button-container">
-          <button id="save-button" onClick={handleSave} disabled={saved}>
+        <div className="save-button-container">
+          <button className="save-button" onClick={handleSave} disabled={saved}>
             Save Result
           </button>
         </div>

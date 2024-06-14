@@ -69,5 +69,5 @@ export const RenderLatex = ({ latex }) => {
     }
   };
 
-  return <div className="snorkl-latex-renderer">{render(latex)}</div>;
+  return <div className="npg-latex-renderer">{render(latex)}</div>;
 };

@@ -32,7 +32,7 @@ main {
   padding: 5px;
 }
 
-#problem-generator {
+.problem-generator {
   display: flex;
   width: 100%;
   justify-content: center;
@@ -41,7 +41,7 @@ main {
   height: auto;
 }
 
-#input-container {
+.input-container {
   background-color: rgba(255, 255, 255, 0.2);
   border: 5px solid rgba(255, 255, 255, 0.25);
   border-radius: 10px;
@@ -57,7 +57,7 @@ main {
   gap: 15px;
 }
 
-#output-container {
+.output-container {
   position: relative;
   background-color: rgba(200, 200, 255, 0.2);
   width: 90%;
@@ -73,30 +73,30 @@ main {
     width: 100%;
   }
 
-  #problem-generator {
+  .problem-generator {
     flex-direction: column;
     width: 100%;
   }
 
-  #input-container,
-  #output-container {
+  .input-container,
+  .output-container {
     margin: 10px auto;
     width: 95%;
   }
 }
 
 @media (max-width: 600px) {
-  #input-container,
-  #output-container {
+  .input-container,
+  .output-container {
     width: 100%;
     padding: 10px;
     height: 500px;
   }
 
   .selector-container,
-  #submit-button,
-  #save-button,
-  #text-input-container {
+  .submit-button,
+  .save-button,
+  .text-input-container {
     width: 100%;
     padding: 10px;
   }
@@ -148,7 +148,7 @@ main {
 }
 
 .selector-button:active {
-  border: none;
+  border: 3px solid transparent;
 }
 
 textarea::placeholder {
@@ -169,7 +169,7 @@ textarea::placeholder {
   border: 3px solid rgba(200, 200, 200, 0.25);
 }
 
-#submit-button {
+.submit-button {
   background-color: rgba(200, 200, 200, 0.4);
   padding: 10px;
   height: 50px;
@@ -187,15 +187,15 @@ textarea::placeholder {
   cursor: pointer;
 }
 
-#submit-button:hover {
+.submit-button:hover {
   background-color: rgba(175, 175, 175, 0.4);
 }
 
-#submit-button:active {
+.submit-button:active {
   background-color: rgba(100, 100, 100, 0.6);
 }
 
-#text-input-container {
+.text-input-container {
   background-color: rgba(200, 200, 200, 0.4);
   min-height: 40px;
   border-radius: 30px;
@@ -209,7 +209,7 @@ textarea::placeholder {
   overflow: hidden;
 }
 
-#text-input-container textarea {
+.text-input-container textarea {
   background: transparent;
   border: none;
   width: 100%;
@@ -227,7 +227,7 @@ textarea::placeholder {
   margin-top: 10px;
 }
 
-#solution-container {
+.solution-container {
   background-color: rgba(200, 200, 255, 0.2);
   width: 90%;
   padding: 20px;
@@ -304,7 +304,7 @@ textarea::placeholder {
   }
 }
 
-#save-button {
+.save-button {
   position: absolute;
   bottom: 0;
   right: 0;
@@ -324,37 +324,37 @@ textarea::placeholder {
   cursor: pointer;
 }
 
-#save-button:hover {
+.save-button:hover {
   background-color: rgba(175, 175, 175, 0.4);
 }
 
-#save-button:active {
+.save-button:active {
   background-color: rgba(100, 100, 100, 0.6);
 }
 
-#save-button:disabled {
+.save-button:disabled {
   animation: hideButton 1s forwards;
   pointer-events: none;
 }
 
-#save-button:enabled {
+.save-button:enabled {
   animation: showButton 1s forwards;
   pointer-events: auto;
 }
 
-#save-button-container {
+.save-button-container {
   bottom: 0;
   height: 40px;
   margin: 5px;
 }
 
-#diagram-container {
+.diagram-container {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-#delete-button {
+.delete-button {
   border: none;
   background-color: transparent;
   position: absolute;
@@ -363,12 +363,12 @@ textarea::placeholder {
   margin: 5px;
 }
 
-#delete-button:hover {
+.delete-button:hover {
   animation: deleteButton 300ms alternate;
   animation-iteration-count: infinite;
 }
 
-#delete-button:active {
+.delete-button:active {
   font-size: 10px;
   font-weight: bold;
 }
